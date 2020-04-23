@@ -4,6 +4,8 @@ from deeppavlov import configs, build_model, train_model
 from deeppavlov.core.common.file import read_json
 from ml import MLChatBot
 
+# Create the chatbot
+# Train it and Save
 chatbot = MLChatBot()
 chatbot.Train()
 chatbot.Save()

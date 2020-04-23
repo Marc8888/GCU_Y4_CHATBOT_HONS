@@ -57,7 +57,9 @@ class MLChatBot:
 
         insultCheck = self.bertInsultsModel([ message ])
 
+        # Check if an insult was detected
         if (insultCheck[0] == "Insult"):
+            # Return a default response
             return ["Im sorry I'm currently unable to answer that question (ERROR: Insult-Detected)", 0]
         else:
             # Run the training model
