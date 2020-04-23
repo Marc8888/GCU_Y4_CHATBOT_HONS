@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Chatbot</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
+        crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        crossorigin="anonymous">
+
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+    <!-- Navbar-->
+    <header class="header">
+        <nav class="navbar navbar-expand-lg fixed-top py-3">
+            <div class="container"><a href="/" class="navbar-brand text-uppercase font-weight-bold">SPEA</a>
+                <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                    class="navbar-toggler navbar-toggler-right"><i class="fa fa-bars"></i></button>
+
+                <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a href="/" class="nav-link text-uppercase font-weight-bold">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/chat" class="nav-link text-uppercase font-weight-bold">
+                                Chat
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/help" class="nav-link text-uppercase font-weight-bold">Help</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/prototype" class="nav-link text-uppercase font-weight-bold">Prototype</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <div class="container py-5 px-4">
+        <!-- For demo purpose-->
+        <div class="text-center">
+            <!-- <div class="img"> <img src="assets/logo-transparent.png"> </div> -->
+            <div class="d-none d-md-block d-lg-block d-xl-block">
+                <div class="img"> <img src="assets/logo-transparent.png"> </div>
+                <br>
+            </div>
+
+            <div class="d-none d-block d-sm-none d-xs-block d-sm-block d-md-none">
+                <br> <br>
+                <h1 class="display-4 text-white">SPEA</h1>
+                <p class="text-white lead mb-0">Student Personalised Education Assistant</p>
+                <br>
+            </div>
+        </div>
+
+
+        <div class="rounded-lg overflow-hidden shadow">
+            <div class="bg-gray px-4 py-2 bg-light">
+                <p class="h5 mb-0 py-1">Interact with the Chatbot</p>
+            </div>
+
+            <div class="row shadow overflow-hidden" style="margin-left: 0; margin-right: 0">
+                <!-- Chat Box-->
+                <div class="col-12 px-0">
+                    <div class="px-4 py-5 chat-box bg-white" id="bot-chat">
+                    </div>
+
+                    <!-- Typing area -->
+                    <form action="#" id="frmChatPost" class="bg-light">
+                        <div class="input-group">
+                            <input type="text" placeholder="Type a message" aria-describedby="button-addon2"
+                                class="form-control rounded-0 border-0 py-4 bg-light" id="txtMessage">
+                            <div class="input-group-append">
+                                <button id="button-addon2" type="submit" class="btn btn-link"> <i
+                                        class="fa fa-paper-plane"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+    <script src="assets/script-chat.js"></script>
+</body>
+</html>

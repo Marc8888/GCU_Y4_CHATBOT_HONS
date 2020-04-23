@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<title>Chatbot</title>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/darkly/bootstrap.min.css" 
+		integrity="sha384-rCA2D+D9QXuP2TomtQwd+uP50EHjpafN+wruul0sXZzX/Da7Txn4tB9aLMZV4DZm" 
+		crossorigin="anonymous">
+
+	<style>
+		.message-container { margin: 20px; }
+		.message-content {
+			box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+			transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+		}
+
+		.message-content:hover {
+			box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+		}
+		
+		.chat-card-header { height: 9vh; }
+		.chat-card-footer { height: 9vh; }
+
+		.chat-card-body {  
+			overflow-y: scroll;
+			height: 80vh;
+			background: #555;
+		}
+	</style>
+</head>
+<body>
+	<div class="card">
+		<div class="chat-card-header">
+			<h3>Marc Waugh: Chat bot</h3>
+			<div style="margin: 0 auto; max-width: 900px">
+			</div>
+		</div>
+		<div class="chat-card-body py-0" id="MessageBody">
+			<div style="margin: 0 auto; max-width: 900px" id="MessagesContainer"></div>
+		</div>
+		<div class="chat-card-footer">
+			<div style="margin: 0 auto; max-width: 900px">
+				<div class="form-group">
+					<label for="txtMessage">Enter chat message</label>
+					<input type="text" class="form-control" name="txtMessage" id="txtMessage" aria-describedby="hlpTxtMessage" placeholder="Enter message">
+					<small id="hlpTxtMessage" class="form-text text-muted">Enter message to communicate with bot, press enter to send.</small>
+				  </div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+
+	<script>
+		var Templates = {
+			Messages: {
+				Mine: (Title, Message) => $('<div></div>').html(`
+					<div class="message-container">
+						<div class="row">
+							<div class="col-md-10">
+								<div class="card text-left message-content">
+									<div class="card-body">
+										<h4 class="card-title">${Title}</h4>
+										<p class="card-text">${Message}</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				`),
+				Bot: (Title, Message) => $('<div></div>').html(`
+					<div class="message-container">
+						<div class="row">
+							<div class="offset-md-2 col-md-10">
+								<div class="card text-right message-content bg-secondary">
+									<div class="card-body">
+										<h4 class="card-title">${Title}</h4>
+										<p class="card-text">${Message}</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				`)
+			}
+		}
+
+		$(function() {
+			var $messageBody 	  = $('#MessageBody');
+			var $messageContainer = $('#MessagesContainer');
+			var $txtMessage 	  = $('#txtMessage');
+
+			$txtMessage.keypress(function(e) {
+				// If enter key is pressed
+				if (e.which == 13) {
+					// Check if empty
+					if ( $txtMessage.val().trim() == '' )
+						return;
+
+					var userMessage = $txtMessage.val(); // Get our message
+					$txtMessage.val(""); // Reset the textbox
+
+					$.ajax({
+						url: 	"/chatbot/generate",
+						method: "post",
+						dataType: "json",
+						data: {
+							message: userMessage
+						},
+
+						success(data, textStatus, jqXHR) {
+							console.log(data, data.message.length);
+							var botMessage = data.message;
+							var botProbability = data.probability;
+
+							// Add our chat message
+							$messageContainer.append(Templates.Messages.Mine("Me", userMessage));
+
+							for (const msg of botMessage) {
+								$messageContainer.append(Templates.Messages.Bot("SPEA", msg));
+							}
+						
+							$messageBody.animate( { scrollTop: $messageContainer.prop("scrollHeight") }, "slow" );
+						},
+
+						error(jqXHR, textStatus, errorThrown) {
+							console.error(jqXHR, textStatus, errorThrown);
+						}
+					});
+				}
+			});
+		});
+	</script>
+</body>
+
+</html>
