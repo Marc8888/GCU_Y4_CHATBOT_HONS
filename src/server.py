@@ -74,4 +74,5 @@ def flaskThread():
 
 if __name__ == '__main__':
 	flaskThread()
+	# If the web server is to be non blocking
 	# threading.Thread(target=flaskThread).start()
