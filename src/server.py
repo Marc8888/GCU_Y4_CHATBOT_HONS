@@ -54,7 +54,7 @@ def get_response():
 			# Create the response
 			response = {
 				"message":		chatbotResponse[0],
-				"probability":	1 #chatbotResponse[1],
+				"probability":	chatbotResponse[1],
 			}
 
 			# Return the response
