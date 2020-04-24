@@ -18,13 +18,13 @@ class MLChatBot:
         self.bertModel: Chainer = None
         pass
 
-# Train the model
-def Train(self):
-    self.chatbotModel = train_model(config, download=True)
-    self.chatbotModel.save()
+    # Train the model
+    def Train(self):
+        self.chatbotModel = train_model(config, download=True)
+        self.chatbotModel.save()
 
-    # Load the bert database
-    self.bertInsultsModel = build_model(configs.classifiers.insults_kaggle_bert, download=True)
+        # Load the bert database
+        self.bertInsultsModel = build_model(configs.classifiers.insults_kaggle_bert, download=True)
 
     # Load the model
     def LoadModels(self):
